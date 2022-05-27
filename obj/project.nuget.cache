@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "14O/nOEOtUFoe263ZEm6rtmEUDcQ/fAIzBTJ28eQlXDA+BbmnLcS3zDYqUNlNH2lAgZfYnlCJK2jc5Xm1wRRHA==",
+  "success": true,
+  "projectFilePath": "C:\\C#Programy\\PoolScoreBoard\\PoolScoreBoard.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\martin.krendzelak\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\martin.krendzelak\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
