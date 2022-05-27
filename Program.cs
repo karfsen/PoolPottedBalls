@@ -156,16 +156,8 @@ while (true)
     }
     else
     {
-        if (input == "reset")
+        if (input == "restart")
         {
-            solids = new List<Image>
-            {
-                one, two, three, four, five, six, seven, eight
-            };
-            stripes = new List<Image>
-            {
-                nine, ten, eleven, twelve, thirteen, fourteen, fifteen, eight
-            };
             Restart();
         }
         else
