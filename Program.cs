@@ -30,12 +30,12 @@ var fifteen = Image.FromFile("../../../images/15.png");
 
 var solids = new List<Image>
 {
-    one, two, three, four, five, six, seven, eight
+    one, two, three, four, five, six, seven
 };
 
 var stripes = new List<Image>
 {
-    nine, ten, eleven, twelve, thirteen, fourteen, fifteen, eight
+    nine, ten, eleven, twelve, thirteen, fourteen, fifteen
 };
 
 void GenerateImages(bool leftPlayerHasSolids)
@@ -85,9 +85,10 @@ void GenerateImages(bool leftPlayerHasSolids)
 }
 
 Console.WriteLine("Does first player have solid balls?( type 1 for yes, anything for no )");
-var hasLeftPlayerSolidBalls = Console.ReadLine();
+var firstPlayerHasSolidBallsInput = Console.ReadLine();
+var firstPlayerHasSolidBalls = firstPlayerHasSolidBallsInput == "1";
 var isGameFinished = false;
-GenerateImages(hasLeftPlayerSolidBalls == "1");
+GenerateImages(firstPlayerHasSolidBalls);
 
 
 while (true)
@@ -126,8 +127,8 @@ void Game()
                     solids.Remove(seven);
                     break;
                 case 8:
-                    solids.Remove(eight);
-                    stripes.Remove(eight);
+                    if(solids.Count == 0) solids.Remove(eight);
+                    if(stripes.Count == 0) stripes.Remove(eight);
                     isGameFinished = true;
                     break;
                 case 9:
@@ -158,13 +159,16 @@ void Game()
 
             if (isGameFinished)
             {
-                GenerateImages(hasLeftPlayerSolidBalls == "1");
+                GenerateImages(firstPlayerHasSolidBalls);
                 Restart();
                 isGameFinished = false;
                 break;
             }
+            
+            if(stripes.Count == 0) stripes.Add(eight);
+            if(solids.Count == 0) solids.Add(eight);
 
-            GenerateImages(hasLeftPlayerSolidBalls == "1");
+            GenerateImages(firstPlayerHasSolidBalls);
         }
         else
         {
@@ -187,15 +191,16 @@ void Restart()
 
     Console.Clear();
     Console.WriteLine("Does first player have solid balls?( type 1 for yes, anything for no )");
-    hasLeftPlayerSolidBalls = Console.ReadLine();
+    firstPlayerHasSolidBallsInput = Console.ReadLine();
+    firstPlayerHasSolidBalls = firstPlayerHasSolidBallsInput == "1";
     solids = new List<Image>
     {
-        one, two, three, four, five, six, seven, eight
+        one, two, three, four, five, six, seven
     };
     stripes = new List<Image>
     {
-        nine, ten, eleven, twelve, thirteen, fourteen, fifteen, eight
+        nine, ten, eleven, twelve, thirteen, fourteen, fifteen
     };
     
-    GenerateImages(hasLeftPlayerSolidBalls == "1");
+    GenerateImages(firstPlayerHasSolidBalls);
 }
