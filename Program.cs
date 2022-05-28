@@ -89,80 +89,93 @@ var hasLeftPlayerSolidBalls = Console.ReadLine();
 var isGameFinished = false;
 GenerateImages(hasLeftPlayerSolidBalls == "1");
 
+
 while (true)
 {
-    Console.Write("Number of potted ball: ");
-    var input = Console.ReadLine();
-    if (int.TryParse(input, out var intInp))
+    Game();
+}
+void Game()
+{
+    while (true)
     {
-        switch (intInp)
+        Console.Write("Number of potted ball: ");
+        var input = Console.ReadLine();
+        if (int.TryParse(input, out var intInp))
         {
-            case 1:
-                solids.Remove(one);
+            switch (intInp)
+            {
+                case 1:
+                    solids.Remove(one);
+                    break;
+                case 2:
+                    solids.Remove(two);
+                    break;
+                case 3:
+                    solids.Remove(three);
+                    break;
+                case 4:
+                    solids.Remove(four);
+                    break;
+                case 5:
+                    solids.Remove(five);
+                    break;
+                case 6:
+                    solids.Remove(six);
+                    break;
+                case 7:
+                    solids.Remove(seven);
+                    break;
+                case 8:
+                    solids.Remove(eight);
+                    stripes.Remove(eight);
+                    isGameFinished = true;
+                    break;
+                case 9:
+                    stripes.Remove(nine);
+                    break;
+                case 10:
+                    stripes.Remove(ten);
+                    break;
+                case 11:
+                    stripes.Remove(eleven);
+                    break;
+                case 12:
+                    stripes.Remove(twelve);
+                    break;
+                case 13:
+                    stripes.Remove(thirteen);
+                    break;
+                case 14:
+                    stripes.Remove(fourteen);
+                    break;
+                case 15:
+                    stripes.Remove(fifteen);
+                    break;
+                default:
+                    Console.WriteLine("Wrong ball number, type numbers from 1 to 15\n");
+                    break;
+            }
+
+            if (isGameFinished)
+            {
+                GenerateImages(hasLeftPlayerSolidBalls == "1");
+                Restart();
+                isGameFinished = false;
                 break;
-            case 2:
-                solids.Remove(two);
-                break;
-            case 3:
-                solids.Remove(three);
-                break;
-            case 4:
-                solids.Remove(four);
-                break;
-            case 5:
-                solids.Remove(five);
-                break;
-            case 6:
-                solids.Remove(six);
-                break;
-            case 7:
-                solids.Remove(seven);
-                break;
-            case 8:
-                solids.Remove(eight);
-                stripes.Remove(eight);
-                isGameFinished = true;
-                break;
-            case 9:
-                stripes.Remove(nine);
-                break;
-            case 10:
-                stripes.Remove(ten);
-                break;
-            case 11:
-                stripes.Remove(eleven);
-                break;
-            case 12:
-                stripes.Remove(twelve);
-                break;
-            case 13:
-                stripes.Remove(thirteen);
-                break;
-            case 14:
-                stripes.Remove(fourteen);
-                break;
-            case 15:
-                stripes.Remove(fifteen);
-                break;
-            default:
-                Console.WriteLine("Wrong ball number, type numbers from 1 to 15\n");
-                break;
-        }
-        GenerateImages(hasLeftPlayerSolidBalls == "1");
-        if (isGameFinished)
-        {
-            Restart();
-        }
-    }
-    else
-    {
-        if (input == "restart")
-        {
-            Restart();
+            }
+
+            GenerateImages(hasLeftPlayerSolidBalls == "1");
         }
         else
         {
-            Console.WriteLine("Wrong ball number, type numbers from 1 to 15");
+            if (input == "restart")
+            {
+                Restart();
+            }
+            else
+            {
+                Console.WriteLine("Wrong ball number, type numbers from 1 to 15");
+            }
         }
     }
 }
@@ -175,5 +188,14 @@ void Restart()
     Console.Clear();
     Console.WriteLine("Does first player have solid balls?( type 1 for yes, anything for no )");
     hasLeftPlayerSolidBalls = Console.ReadLine();
+    solids = new List<Image>
+    {
+        one, two, three, four, five, six, seven, eight
+    };
+    stripes = new List<Image>
+    {
+        nine, ten, eleven, twelve, thirteen, fourteen, fifteen, eight
+    };
+    
     GenerateImages(hasLeftPlayerSolidBalls == "1");
 }
