@@ -28,6 +28,17 @@ var thirteen = Image.FromFile("../../../images/13.png");
 var fourteen = Image.FromFile("../../../images/14.png");
 var fifteen = Image.FromFile("../../../images/15.png");
 
+var firstPlayerNameFile = File.CreateText("../../../outputs/Player1.txt");
+var secondPlayerNameFile = File.CreateText("../../../outputs/Player2.txt");
+
+var firstPlayerScore = 0;
+var secondPlayerScore = 0;
+var firstPlayerScoreFile = File.CreateText("../../../outputs/Player1Score.txt");
+using (var sw = firstPlayerScoreFile) sw.Write(firstPlayerScore);
+
+var secondPlayerScoreFile = File.CreateText("../../../outputs/Player2Score.txt");
+using (var sw = secondPlayerScoreFile) sw.Write(secondPlayerScore);
+
 var solids = new List<Image>
 {
     one, two, three, four, five, six, seven
@@ -74,19 +85,27 @@ void GenerateImages(bool leftPlayerHasSolids)
 
     if (leftPlayerHasSolids)
     {
-        solidsImage.Save("../../../images/left.png");
-        stripesImage.Save("../../../images/right.png");
+        solidsImage.Save("../../../outputs/left.png");
+        stripesImage.Save("../../../outputs/right.png");
     }
     else
     {
-        stripesImage.Save("../../../images/left.png");
-        solidsImage.Save("../../../images/right.png");
+        stripesImage.Save("../../../outputs/left.png");
+        solidsImage.Save("../../../outputs/right.png");
     }
 }
 
-Console.WriteLine("Does first player have solid balls?( type 1 for yes, anything for no )");
+Console.Write("Enter name of the first player: ");
+var nameOfFirstPlayer = Console.ReadLine();
+Console.Write("Enter name of the second player: ");
+var nameOfSecondPlayer = Console.ReadLine();
+
+using (var sw = firstPlayerNameFile) sw.Write(nameOfFirstPlayer);
+using (var sw = secondPlayerNameFile) sw.Write(nameOfSecondPlayer);
+
+Console.WriteLine($"Does {nameOfFirstPlayer} have solid balls?(y/n)");
 var firstPlayerHasSolidBallsInput = Console.ReadLine();
-var firstPlayerHasSolidBalls = firstPlayerHasSolidBallsInput == "1";
+var firstPlayerHasSolidBalls = firstPlayerHasSolidBallsInput == "y";
 var isGameFinished = false;
 GenerateImages(firstPlayerHasSolidBalls);
 
@@ -160,6 +179,23 @@ void Game()
             if (isGameFinished)
             {
                 GenerateImages(firstPlayerHasSolidBalls);
+                Console.Write("Did first player win this leg?(y/n) ");
+                var firstPlayerWonLeg = Console.ReadLine();
+                if (firstPlayerWonLeg == "y")
+                {
+                    firstPlayerScore++;
+                    firstPlayerScoreFile = File.CreateText("../../../outputs/Player1Score.txt");
+                    using var sw = firstPlayerScoreFile;
+                    sw.Write(firstPlayerScore);
+                }
+                else
+                {
+                    secondPlayerScore++;
+                    secondPlayerScoreFile = File.CreateText("../../../outputs/Player2Score.txt");
+                    using var sw = secondPlayerScoreFile;
+                    sw.Write(secondPlayerScore);
+                }
+                    
                 Restart();
                 isGameFinished = false;
                 break;
@@ -190,9 +226,9 @@ void Restart()
     Thread.Sleep(2000);
 
     Console.Clear();
-    Console.WriteLine("Does first player have solid balls?( type 1 for yes, anything for no )");
+    Console.WriteLine($"Does {nameOfFirstPlayer} have solid balls?(y/n) ");
     firstPlayerHasSolidBallsInput = Console.ReadLine();
-    firstPlayerHasSolidBalls = firstPlayerHasSolidBallsInput == "1";
+    firstPlayerHasSolidBalls = firstPlayerHasSolidBallsInput == "y";
     solids = new List<Image>
     {
         one, two, three, four, five, six, seven
